@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CalculaterTab from './CalculaterTab';
 import useFormatter from '../../../../shared/hooks/useFormatter';
+import openExchangeApi from '../../../../shared/apis/openExchangeApi';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
@@ -8,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Grid } from '@material-ui/core';
 import ExposureIcon from '@material-ui/icons/Exposure';
-import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   popoverPaper: {
@@ -21,23 +21,36 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '1.5em',
   },
   input1: {
-    width: '9.2em',
-    height: '1.6em',
-    fontSize: '1.5em',
+    width: '11.4em',
+    fontSize: '1.2em',
+    padding: '0.7em',
     backgroundColor: theme.palette.common.blue2,
     color: theme.palette.secondary.main,
     borderRadius: '1.5em',
     outline: 'none',
+    marginBottom: '1em',
   },
   inputText: {
-    width: '9em',
+    width: '8.4em',
     height: '1.4em',
-    fontSize: '1.5em',
+    fontSize: '1.4em',
     backgroundColor: theme.palette.common.blue2,
     color: theme.palette.secondary.main,
-    margin: '0.1em 1em 1em 1em',
+    margin: '0.1em 0.5em 1em 0.5em',
     borderRadius: '1.5em',
     outline: 'none',
+    padding: '0.4em 0.4em 0.4em 1em',
+  },
+  inputTotalAmount: {
+    width: '8.4em',
+    height: '1.4em',
+    fontSize: '1.4em',
+    backgroundColor: theme.palette.common.blue4,
+    color: theme.palette.secondary.main,
+    margin: '0.1em 0.5em 0.5em 0.5em',
+    borderRadius: '1.5em',
+    outline: 'none',
+    padding: '0.4em 0.4em 0.4em 1em',
   },
   inputUpText: {
     color: theme.palette.common.white,
@@ -55,15 +68,17 @@ const useStyles = makeStyles((theme) => ({
 
 const CoinCurrencyCal = ({ coins }) => {
   const classes = useStyles();
-  const { currencyFormatter, numberFourFormatter } = useFormatter();
+  const { currencyFormatter, numberFormatter } = useFormatter();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [input1CoinPrice, setInput1CoinPrice] = useState('');
   const [input2CoinPrice, setInput2CoinPrice] = useState('');
   const [quantity, setQuantity] = useState('');
   const [tabValue, setTabValue] = React.useState(0);
+  const [namesOfCurrencies, setNamesOfCurrencies] = useState([]);
   const [currencies, setCurrencies] = useState([]);
   const [selectedCurrency, setSelectedCurrency] = useState('AED');
   const [calcResult, setCalcResult] = useState('');
+  const [coinSelected1, setCoinSelected1] = useState('');
 
   // Handle Events
   const handleClick = (event) => {
@@ -72,6 +87,17 @@ const CoinCurrencyCal = ({ coins }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // selectedcoinName1
+  useEffect(() => {
+    const selected1 = coins.filter(
+      (coin) => coin.current_price == input1CoinPrice
+    );
+    console.log(selected1);
+
+    setCoinSelected1(selected1);
+  }, [input1CoinPrice]);
+
   // Calculater Logic
   useEffect(() => {
     let result;
@@ -85,19 +111,21 @@ const CoinCurrencyCal = ({ coins }) => {
             (input2CoinPrice === '' ? 1 : input2CoinPrice);
     } else {
       result =
-        (input1CoinPrice * quantity) /
+        input1CoinPrice *
+          quantity *
           (currencies[selectedCurrency] === ''
             ? 1
             : currencies[selectedCurrency]) ===
         0
           ? ''
-          : (input1CoinPrice * quantity) /
+          : input1CoinPrice *
+            quantity *
             (currencies[selectedCurrency] === ''
               ? 1
               : currencies[selectedCurrency]);
     }
 
-    console.log(selectedCurrency);
+    console.log(currencies[selectedCurrency]);
 
     setCalcResult(result);
   }, [
@@ -108,17 +136,21 @@ const CoinCurrencyCal = ({ coins }) => {
     quantity,
     selectedCurrency,
   ]);
+  console.log(currencies);
   //data fetch
   useEffect(() => {
-    const currencyData = async () => {
-      const { data } = await axios.get(
-        'http://data.fixer.io/api/latest?access_key=ece8096d24111741707772226f79c9b8',
-        {}
-      );
-      setCurrencies(data.rates);
+    const response = async () => {
+      const prices = await openExchangeApi.get('/latest.json');
+      const names = await openExchangeApi.get('/currencies.json');
+
+      setCurrencies(prices.data.rates);
+      setNamesOfCurrencies(names.data);
+
+      console.log(names.data);
     };
-    currencyData();
-  }, [setCurrencies]);
+
+    response();
+  }, []);
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -244,11 +276,14 @@ const CoinCurrencyCal = ({ coins }) => {
                   className={classes.input1}
                 >
                   <option value="" className={classes.optionText}></option>
-                  {Object.keys(currencies).map((currency) => {
+                  {Object.entries(namesOfCurrencies).map((currency) => {
                     return (
                       <>
-                        <option value={currency} className={classes.optionText}>
-                          {currency}
+                        <option
+                          value={currency[0]}
+                          className={classes.optionText}
+                        >
+                          {`${currency[1]}  (${currency[0]})`}
                         </option>
                       </>
                     );
@@ -258,7 +293,7 @@ const CoinCurrencyCal = ({ coins }) => {
             )}
           </Grid>
           {/*inputText  */}
-          <Grid container direction="row">
+          <Grid container direction="row" justify="center">
             <Grid item>
               <Typography align="center" className={classes.inputUpText}>
                 Enter a quantity
@@ -277,13 +312,22 @@ const CoinCurrencyCal = ({ coins }) => {
               </Typography>
 
               <input
-                className={classes.inputText}
-                type="number"
+                className={classes.inputTotalAmount}
+                type="text"
                 readOnly
-                value={calcResult}
+                value={
+                  tabValue === 1
+                    ? currencyFormatter(calcResult, 4, selectedCurrency)
+                    : numberFormatter(calcResult, 4)
+                }
               />
             </Grid>
           </Grid>
+          {input1CoinPrice && (
+            <Typography align="center" className={classes.inputUpText}>
+              1 {coinSelected1[0]?.name} = {input1CoinPrice} $
+            </Typography>
+          )}
         </Grid>
       </Popover>
     </div>

@@ -1,8 +1,8 @@
 const useFormatter = () => {
-  const currencyFormatter = (number, decimal) => {
+  const currencyFormatter = (number, decimal, type = 'USD') => {
     const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: type,
       maximumSignificantDigits: decimal,
     }).format(number);
     return formatted;
@@ -11,15 +11,9 @@ const useFormatter = () => {
     const formattedPercent = parseFloat(number).toFixed(2) + '%';
     return formattedPercent;
   };
-  const numberFormatter = (number) => {
+  const numberFormatter = (number, digit = 12) => {
     const formatted = new Intl.NumberFormat('en-US', {
-      maximumSignificantDigits: 12,
-    }).format(number);
-    return formatted;
-  };
-  const numberFourFormatter = (number) => {
-    const formatted = new Intl.NumberFormat('en-US', {
-      maximumSignificantDigits: 12,
+      maximumSignificantDigits: digit,
     }).format(number);
     return formatted;
   };
@@ -28,7 +22,6 @@ const useFormatter = () => {
     currencyFormatter,
     percentageFormatter,
     numberFormatter,
-    numberFourFormatter,
   };
 };
 
