@@ -193,7 +193,7 @@ const CoinTable = () => {
       setPage(1);
     }
 
-    // Case : favorite check and search with result
+    // Case : favorite check and search with result 0000
     if (favoriteCheck && searchTerm && searchedList.length > 0) {
       const searchResult1 = favoriteList.filter((coin) => {
         return coin.name.toLowerCase().includes(searchTerm.toLowerCase()); // true & false
@@ -208,7 +208,7 @@ const CoinTable = () => {
       setRenderList([]);
     }
   }, [searchTerm, searchedList, coins, favoriteCheck, favoriteList]);
-
+  console.log('deniz');
   //Dom handlers
   const handlerPage = (e, newValue) => {
     setPage(newValue);
