@@ -6,6 +6,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Grid } from '@material-ui/core';
+import React from 'react';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -61,12 +63,16 @@ const AppBarCoins = ({
   coins,
 }) => {
   const classes = useStyles();
+  const [state, setState] = React.useState({});
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
 
   return (
     <Grid container className={classes.main}>
       <Grid item container alignItems="center" className={classes.main2}>
         {/* Search Button */}
-        <Grid item container xs={6}>
+        <Grid item container xs={3}>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -88,6 +94,13 @@ const AppBarCoins = ({
             control={<Checkbox />}
             label="Favorites"
             onChange={(event) => setFavoriteCheck(event.target.checked)}
+          />
+        </Grid>
+        {/* Live Prices  */}
+        <Grid item container xs={3} justify="flex-end">
+          <FormControlLabel
+            control={<Switch onChange={handleChange} />}
+            label="Live Prices"
           />
         </Grid>
         {/* Calculater Popover */}

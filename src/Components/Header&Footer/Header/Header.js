@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%',
   },
   tab: {
+    fontSize: '1em',
     '&:hover': {
       color: theme.palette.common.pink2,
       cursor: 'pointer',
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     textTransform: 'none',
     textDecoration: 'none',
-    fontSize: '1.3em',
+    fontSize: '1.8em',
   },
 
   tabRoot: {
@@ -89,7 +90,7 @@ const Header = () => {
         </Grid>
 
         {/* Tabs */}
-        <Grid item container xs={9} justify="flex-end">
+        <Grid item container xs={9} justify="flex-end" alignItems="center">
           <Hidden smDown>
             <Tabs
               className={classes.tabs}

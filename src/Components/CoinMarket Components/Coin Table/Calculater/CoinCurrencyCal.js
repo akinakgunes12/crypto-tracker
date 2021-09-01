@@ -88,7 +88,7 @@ const CoinCurrencyCal = ({ coins }) => {
     setAnchorEl(null);
   };
 
-  // selectedcoinName1
+  // selectedcoin1
   useEffect(() => {
     const selected1 = coins.filter(
       (coin) => coin.current_price == input1CoinPrice

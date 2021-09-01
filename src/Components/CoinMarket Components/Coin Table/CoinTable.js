@@ -70,6 +70,13 @@ const useStyles = makeStyles((theme) => ({
     height: '1em',
     width: '1em',
   },
+  title: {
+    fontSize: '1.5em',
+    marginBottom: '1.5em',
+    marginTop: '0.5em',
+    textDecoration: 'underline #FF78CB',
+    textUnderlineOffset: '0.5em',
+  },
 }));
 
 const CoinTable = () => {
@@ -243,6 +250,13 @@ const CoinTable = () => {
 
   return (
     <>
+      {/* Title */}
+      <Grid container justify="center">
+        <Typography align="center" className={classes.title}>
+          Today's Cryptocurrency Prices by Market Cap
+        </Typography>
+      </Grid>
+
       {/* Cards */}
       <Grid
         item
