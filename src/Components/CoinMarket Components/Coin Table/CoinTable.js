@@ -4,6 +4,7 @@ import useFormatter from '../../../shared/hooks/useFormatter';
 import AppBarCoins from '../AppBarCoins';
 import CoinTableCharts from './CoinTableCharts';
 import CoinCard from '../CoinCard';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
   Grid,
@@ -92,10 +93,12 @@ const CoinTable = () => {
   const [favoriteCheck, setFavoriteCheck] = useState(false);
   const { currencyFormatter, percentageFormatter, numberFormatter } =
     useFormatter();
+  const [isLoading, setIsLoading] = useState(false);
 
   // Data Fetching
   useEffect(() => {
     const coinData = async () => {
+      setIsLoading(true);
       const { data } = await axios.get(
         'https://api.coingecko.com/api/v3/coins/markets',
         {
@@ -108,6 +111,7 @@ const CoinTable = () => {
         }
       );
       setCoins(data);
+      setIsLoading(false);
     };
     coinData();
   }, []);
@@ -335,6 +339,9 @@ const CoinTable = () => {
             </TableRow>
           </TableHead>
 
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {true && <CircularProgress color="secondary" />}
+          </div>
           {/**  Body **/}
           <TableBody>
             {renderList.slice((page - 1) * 10, page * 10).map((coin) => {

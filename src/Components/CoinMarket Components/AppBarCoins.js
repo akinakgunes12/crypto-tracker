@@ -96,13 +96,7 @@ const AppBarCoins = ({
             onChange={(event) => setFavoriteCheck(event.target.checked)}
           />
         </Grid>
-        {/* Live Prices  */}
-        <Grid item container xs={3} justify="flex-end">
-          <FormControlLabel
-            control={<Switch onChange={handleChange} />}
-            label="Live Prices"
-          />
-        </Grid>
+
         {/* Calculater Popover */}
         <Grid item container justify="flex-end" xs={3}>
           <CoinCurrencyCal coins={coins} />
