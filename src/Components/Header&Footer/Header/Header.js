@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles((theme) => ({
   Main: {
     backgroundColor: theme.palette.primary.main,
-    marginTop: '1.5em',
+
     marginBottom: '1.5em',
     paddingLeft: '3em',
     paddingRight: '3em',
@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'none',
     textDecoration: 'none',
     fontSize: '1.8em',
+    marginTop: '1.5rem',
   },
 
   logo: {
