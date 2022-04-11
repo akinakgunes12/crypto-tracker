@@ -260,13 +260,16 @@ const CoinTable = () => {
           Today's Cryptocurrency Prices by Market Cap
         </Typography>
       </Grid>
+      <Grid container justify="center">
+        {isLoading && <CircularProgress color="secondary" />}
+      </Grid>
 
       {/* Cards */}
       <Grid
         item
         container
         spacing={2}
-        style={{ paddingLeft: '3em', paddingRight: '3em' }}
+        style={{ paddingLeft: '3em', paddingRight: '3em', marginTop: '1em' }}
       >
         <CoinCard coins={coins} />
       </Grid>
@@ -339,9 +342,6 @@ const CoinTable = () => {
             </TableRow>
           </TableHead>
 
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {true && <CircularProgress color="secondary" />}
-          </div>
           {/**  Body **/}
           <TableBody>
             {renderList.slice((page - 1) * 10, page * 10).map((coin) => {

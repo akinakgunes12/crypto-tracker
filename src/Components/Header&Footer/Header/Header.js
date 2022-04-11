@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import HeaderMenu from './HeaderMenu';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
-import { Button, Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   Main: {

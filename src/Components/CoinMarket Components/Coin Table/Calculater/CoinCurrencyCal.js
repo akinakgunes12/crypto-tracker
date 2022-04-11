@@ -96,7 +96,7 @@ const CoinCurrencyCal = ({ coins }) => {
     console.log(selected1);
 
     setCoinSelected1(selected1);
-  }, [input1CoinPrice]);
+  }, [input1CoinPrice, coins]);
 
   // Calculater Logic
   useEffect(() => {
@@ -212,14 +212,13 @@ const CoinCurrencyCal = ({ coins }) => {
                 </option>
                 {coins.map((coin) => {
                   return (
-                    <>
-                      <option
-                        value={coin.current_price}
-                        className={classes.optionText}
-                      >
-                        {coin.name}
-                      </option>
-                    </>
+                    <option
+                      value={coin.current_price}
+                      className={classes.optionText}
+                      key={coin.name}
+                    >
+                      {coin.name}
+                    </option>
                   );
                 })}
               </select>
@@ -246,14 +245,13 @@ const CoinCurrencyCal = ({ coins }) => {
                   <option value="" className={classes.optionText}></option>
                   {coins.map((coin) => {
                     return (
-                      <>
-                        <option
-                          value={coin.current_price}
-                          className={classes.optionText}
-                        >
-                          {coin.name}
-                        </option>
-                      </>
+                      <option
+                        value={coin.current_price}
+                        className={classes.optionText}
+                        key={coin.name}
+                      >
+                        {coin.name}
+                      </option>
                     );
                   })}
                 </select>
@@ -276,16 +274,15 @@ const CoinCurrencyCal = ({ coins }) => {
                   className={classes.input1}
                 >
                   <option value="" className={classes.optionText}></option>
-                  {Object.entries(namesOfCurrencies).map((currency) => {
+                  {Object.entries(namesOfCurrencies).map((currency, i) => {
                     return (
-                      <>
-                        <option
-                          value={currency[0]}
-                          className={classes.optionText}
-                        >
-                          {`${currency[1]}  (${currency[0]})`}
-                        </option>
-                      </>
+                      <option
+                        value={currency[0]}
+                        className={classes.optionText}
+                        key={i}
+                      >
+                        {`${currency[1]}  (${currency[0]})`}
+                      </option>
                     );
                   })}
                 </select>

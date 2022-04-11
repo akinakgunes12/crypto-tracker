@@ -69,14 +69,18 @@ const CoinCard = ({ coins }) => {
     <>
       {topMovest.map((coin, i) => {
         return (
-          <Grid item container xs direction="column">
+          <Grid item container xs direction="column" key={coin.name}>
             <Card className={classes.root}>
               <Grid item container key={i}>
                 {/*Top  */}
                 <Grid item container direction="row">
                   {/**Coin logo**/}
                   <Grid item container xs={3} justify="flex-start">
-                    <img src={coin.image} className={classes.logo} />
+                    <img
+                      src={coin.image}
+                      className={classes.logo}
+                      alt="coinImage"
+                    />
                   </Grid>
                   {/**Coin Charts**/}
                   <Grid item container xs={9} justify="flex-end">
