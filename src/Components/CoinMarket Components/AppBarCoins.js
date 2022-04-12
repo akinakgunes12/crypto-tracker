@@ -12,6 +12,14 @@ const useStyles = makeStyles((theme) => ({
   main: {
     paddingLeft: '3em',
     paddingRight: '3em',
+    marginTop: '1em',
+  },
+
+  '@media (max-width: 440px)': {
+    main: {
+      paddingLeft: '0em',
+      paddingRight: '0em',
+    },
   },
 
   main2: {
@@ -19,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.light,
     marginTop: '0.5em',
     marginBottom: '0.5em',
-    padding: '0.5em 1em',
+    padding: '0 1em 1em',
   },
   search: {
     position: 'relative',
@@ -47,12 +55,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '20ch',
-      '&:focus': {
-        width: '25ch',
-      },
-    },
   },
 }));
 
@@ -68,7 +70,14 @@ const AppBarCoins = ({
     <Grid container className={classes.main}>
       <Grid item container alignItems="center" className={classes.main2}>
         {/* Search Button */}
-        <Grid item container xs={3}>
+        <Grid
+          item
+          container
+          justify="center"
+          xs={12}
+          md={6}
+          style={{ marginTop: '1em' }}
+        >
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -85,7 +94,14 @@ const AppBarCoins = ({
           </div>
         </Grid>
         {/* Favorites CheckBox  */}
-        <Grid item container justify="flex-end" xs={3}>
+        <Grid
+          item
+          container
+          justify="center"
+          xs={6}
+          md={3}
+          style={{ marginTop: '1em' }}
+        >
           <FormControlLabel
             control={<Checkbox />}
             label="Favorites"
@@ -94,7 +110,14 @@ const AppBarCoins = ({
         </Grid>
 
         {/* Calculater Popover */}
-        <Grid item container justify="flex-end" xs={3}>
+        <Grid
+          item
+          container
+          justify="center"
+          xs={6}
+          md={3}
+          style={{ borderRadius: '50px', marginTop: '1em' }}
+        >
           <CoinCurrencyCal coins={coins} />
         </Grid>
       </Grid>

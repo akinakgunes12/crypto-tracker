@@ -8,7 +8,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const useStyles = makeStyles((theme) => ({
-  cardGrid: {},
+ 
   root: {
     minWidth: 280,
     minHeight: 150,
@@ -75,7 +75,7 @@ const CoinCard = ({ coins }) => {
             xs
             direction="column"
             key={coin.name}
-            className={classes.cardGrid}
+            
           >
             <Card className={classes.root}>
               <Grid item container>
