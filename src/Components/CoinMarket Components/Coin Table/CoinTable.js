@@ -78,6 +78,24 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'underline #FF78CB',
     textUnderlineOffset: '0.5em',
   },
+  cards: {
+    paddingLeft: '3em',
+    paddingRight: '3em',
+    marginTop: '1em',
+  },
+
+  '@media (max-width: 600px)': {
+    cards: {
+      paddingLeft: '0em',
+      paddingRight: '0em',
+    },
+  },
+  '@media (min-width: 440px)': {
+    cards: {
+      paddingLeft: '3em',
+      paddingRight: '3em',
+    },
+  },
 }));
 
 const CoinTable = () => {
@@ -265,12 +283,7 @@ const CoinTable = () => {
       </Grid>
 
       {/* Cards */}
-      <Grid
-        item
-        container
-        spacing={2}
-        style={{ paddingLeft: '3em', paddingRight: '3em', marginTop: '1em' }}
-      >
+      <Grid item container spacing={2} className={classes.cards}>
         <CoinCard coins={coins} />
       </Grid>
       <AppBarCoins

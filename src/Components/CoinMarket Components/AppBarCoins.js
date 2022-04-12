@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '3em',
     paddingRight: '3em',
   },
+
   main2: {
     borderRadius: '10px',
     backgroundColor: theme.palette.primary.light,

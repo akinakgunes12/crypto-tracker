@@ -1,5 +1,4 @@
 import useFormatter from '../../shared/hooks/useFormatter';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import { useEffect, useState } from 'react';
@@ -9,22 +8,25 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const useStyles = makeStyles((theme) => ({
+  cardGrid: {},
   root: {
-    maxWidth: 350,
-    maxHeight: 150,
+    minWidth: 280,
+    minHeight: 150,
     border: ' 10px solid ',
     borderRadius: '15px',
     borderColor: theme.palette.primary.light,
     justifyContent: 'center',
     padding: '1em',
   },
-
+  '@media (max-width: 600px)': {
+    root: {
+      minWidth: 250,
+    },
+  },
   logo: {
     maxnWidth: '3em',
     maxHeight: '3em',
   },
-  charts: {},
-
   name: {
     textTransform: 'capitalize',
     fontSize: '1.2em',
@@ -35,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1em',
     opacity: '0.6',
   },
-
   currentPrice: {
     fontSize: '2em',
     fontWeight: 'bold',
@@ -63,15 +64,21 @@ const CoinCard = ({ coins }) => {
     const low = percentageSortedCoins.slice(98, 100);
     const topAndLow = top.concat(low);
     setTopMovest(topAndLow);
-    console.log(topAndLow);
   }, [coins]);
   return (
     <>
-      {topMovest.map((coin, i) => {
+      {topMovest.map((coin) => {
         return (
-          <Grid item container xs direction="column" key={coin.name}>
+          <Grid
+            item
+            container
+            xs
+            direction="column"
+            key={coin.name}
+            className={classes.cardGrid}
+          >
             <Card className={classes.root}>
-              <Grid item container key={i}>
+              <Grid item container>
                 {/*Top  */}
                 <Grid item container direction="row">
                   {/**Coin logo**/}
@@ -84,11 +91,7 @@ const CoinCard = ({ coins }) => {
                   </Grid>
                   {/**Coin Charts**/}
                   <Grid item container xs={9} justify="flex-end">
-                    <CoinTableCharts
-                      width={200}
-                      coin={coin}
-                      className={classes.charts}
-                    />
+                    <CoinTableCharts width={200} coin={coin} />
                   </Grid>
                 </Grid>
 
