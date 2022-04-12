@@ -37,6 +37,12 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '3em',
     paddingRight: '3em',
   },
+  '@media (max-width: 520px)': {
+    containerTable: {
+      paddingLeft: '0.5em',
+      paddingRight: '0.5em',
+    },
+  },
   table: {
     backgroundColor: 'white',
     border: '6px solid ',
@@ -72,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     width: '1em',
   },
   title: {
-    fontSize: '1.5em',
+    fontSize: '4.2vmin',
     marginBottom: '1.5em',
     marginTop: '0.5em',
     textDecoration: 'underline #FF78CB',
@@ -86,8 +92,8 @@ const useStyles = makeStyles((theme) => ({
 
   '@media (max-width: 600px)': {
     cards: {
-      paddingLeft: '0em',
-      paddingRight: '0em',
+      paddingLeft: '0.5em',
+      paddingRight: '0.5em',
     },
   },
   '@media (min-width: 440px)': {
@@ -225,7 +231,7 @@ const CoinTable = () => {
     // Case : favorite check and search with result 0000
     if (favoriteCheck && searchTerm && searchedList.length > 0) {
       const searchResult1 = favoriteList.filter((coin) => {
-        return coin.name.toLowerCase().includes(searchTerm.toLowerCase()); // true & false
+        return coin.name.toLowerCase().includes(searchTerm.toLowerCase());
       });
       setRenderList(searchResult1);
     }

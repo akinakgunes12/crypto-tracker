@@ -8,7 +8,6 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const useStyles = makeStyles((theme) => ({
- 
   root: {
     minWidth: 280,
     minHeight: 150,
@@ -17,12 +16,13 @@ const useStyles = makeStyles((theme) => ({
     borderColor: theme.palette.primary.light,
     justifyContent: 'center',
     padding: '1em',
-  },
-  '@media (max-width: 600px)': {
-    root: {
-      minWidth: 250,
+    '@media (max-width: 600px)': {
+      root: {
+        minWidth: 250,
+      },
     },
   },
+
   logo: {
     maxnWidth: '3em',
     maxHeight: '3em',
@@ -43,6 +43,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '0.3em',
     color: theme.palette.primary.main,
   },
+  '@media (max-width: 600px)': {
+    currentPrice: {
+      fontSize: '1.7em',
+    },
+  },
+
   percentageChange: {
     marginTop: '1em',
     fontSize: '1.2em',
@@ -69,14 +75,7 @@ const CoinCard = ({ coins }) => {
     <>
       {topMovest.map((coin) => {
         return (
-          <Grid
-            item
-            container
-            xs
-            direction="column"
-            key={coin.name}
-            
-          >
+          <Grid item container xs direction="column" key={coin.name}>
             <Card className={classes.root}>
               <Grid item container>
                 {/*Top  */}

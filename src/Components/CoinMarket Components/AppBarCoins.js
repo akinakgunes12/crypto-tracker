@@ -14,14 +14,12 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: '3em',
     marginTop: '1em',
   },
-
   '@media (max-width: 440px)': {
     main: {
-      paddingLeft: '0em',
-      paddingRight: '0em',
+      paddingLeft: '0.5em',
+      paddingRight: '0.5em',
     },
   },
-
   main2: {
     borderRadius: '10px',
     backgroundColor: theme.palette.primary.light,

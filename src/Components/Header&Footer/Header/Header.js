@@ -6,10 +6,15 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles((theme) => ({
   Main: {
     backgroundColor: theme.palette.primary.main,
-
     marginBottom: '1.5em',
-    paddingLeft: '3em',
+    paddingLeft: '2em',
     paddingRight: '3em',
+    fontSize: '3.2vmin',
+  },
+  '@media (max-width: 440px)': {
+    Main: {
+      paddingLeft: '1em',
+    },
   },
 
   coinOne: {

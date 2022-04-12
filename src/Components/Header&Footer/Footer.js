@@ -14,12 +14,24 @@ const useStyles = makeStyles((theme) => ({
   copyTextGrid: {
     padding: '1em 0em 1em 3em ',
   },
+  '@media (max-width: 501px)': {
+    copyTextGrid: {
+      paddingRight: '3em',
+    },
+  },
+
   text: {
     fontSize: '0.8em',
   },
   logos: {
     paddingRight: '3em',
   },
+  '@media (max-width: 500px)': {
+    logos: {
+      paddingRight: '0em',
+    },
+  },
+
   logo: {
     '&:hover': {
       color: theme.palette.common.pink2,
