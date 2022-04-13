@@ -49,14 +49,67 @@ const useStyles = makeStyles((theme) => ({
     borderColor: theme.palette.primary.light,
     paddingRight: '3em',
   },
+
+  imageNameGrid: {
+    display: 'flex',
+  },
+  '@media (min-width: 961px)': {
+    imageNameGrid: {
+      marginLeft: '2em',
+      marginBottom: '1.5em',
+    },
+  },
+
+  '@media (max-width: 960px)': {
+    imageNameGrid: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  },
+
   coinImage: {
     maxWidth: '2em',
     maxHeight: '2em',
     marginLeft: '3em',
-    marginRight: '5em',
+  },
+  '@media (max-width: 962px)': {
+    coinImage: {
+      alignItems: 'center',
+      margin: '0 auto',
+    },
+  },
+  coinName: {
+    marginLeft: '1em',
+    lineHeight: '200%',
+  },
+  '@media (min-width: 960px)': {
+    coinImage: {
+      marginLeft: '4em',
+      marginRight: '1em',
+    },
+  },
+  '@media (max-width: 1303px)': {
+    coinName: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      margin: '0 auto',
+    },
   },
   bookMarker: {
     marginLeft: '2em',
+  },
+  '@media (min-width: 962px)': {
+    bookMarker: {
+      marginTop: '2em',
+    },
+  },
+
+  '@media (max-width: 961px)': {
+    bookMarker: {
+      marginLeft: '0em',
+      maxWidth: '2em',
+    },
   },
   paginationGrid: {
     marginBottom: '2em',
@@ -368,8 +421,13 @@ const CoinTable = () => {
                 <TableRow key={coin.id}>
                   {/***Logo & Name ***/}
                   <TableCell>
-                    <Grid container alignItems="center">
-                      <Grid item xs={2}>
+                    <Grid container>
+                      <Grid
+                        item
+                        xs={5}
+                        md={9}
+                        className={classes.favoriteCheckIcon}
+                      >
                         {favoriteList.some((c) => c.name === coin.name) ? (
                           <IconButton
                             onClick={() => favoriteHandler(coin)}
@@ -392,15 +450,23 @@ const CoinTable = () => {
                           </IconButton>
                         )}
                       </Grid>
-                      <Grid item xs={3}>
-                        <img
-                          src={coin.image}
-                          className={classes.coinImage}
-                          alt="logo"
-                        />
-                      </Grid>
-                      <Grid item xs={3}>
-                        {coin.name}
+                      <Grid
+                        item
+                        xs={7}
+                        md={10}
+                        className={classes.imageNameGrid}
+                      >
+                        <Grid item>
+                          <img
+                            src={coin.image}
+                            className={classes.coinImage}
+                            alt="logo"
+                          />
+                        </Grid>
+
+                        <Grid item className={classes.coinName} xs={12}>
+                          {coin.name}
+                        </Grid>
                       </Grid>
                     </Grid>
                   </TableCell>
