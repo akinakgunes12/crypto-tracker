@@ -69,11 +69,11 @@ const useStyles = makeStyles((theme) => ({
 const CoinCurrencyCal = ({ coins }) => {
   const classes = useStyles();
   const { currencyFormatter, numberFormatter } = useFormatter();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [input1CoinPrice, setInput1CoinPrice] = useState('');
   const [input2CoinPrice, setInput2CoinPrice] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [tabValue, setTabValue] = React.useState(0);
+  const [tabValue, setTabValue] = useState(0);
   const [namesOfCurrencies, setNamesOfCurrencies] = useState([]);
   const [currencies, setCurrencies] = useState([]);
   const [selectedCurrency, setSelectedCurrency] = useState('AED');
@@ -84,6 +84,7 @@ const CoinCurrencyCal = ({ coins }) => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -93,8 +94,6 @@ const CoinCurrencyCal = ({ coins }) => {
     const selected1 = coins.filter(
       (coin) => coin.current_price == input1CoinPrice
     );
-    console.log(selected1);
-
     setCoinSelected1(selected1);
   }, [input1CoinPrice, coins]);
 

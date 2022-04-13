@@ -4,18 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-// function TabPanel(props) {
-//   const { children, value, index, ...other } = props;
-
-//   return (
-//     <div>
-//       <Box p={3}>
-//         <Typography>{children}</Typography>
-//       </Box>
-//     </div>
-//   );
-// }
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
